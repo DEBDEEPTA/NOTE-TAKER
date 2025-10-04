@@ -1,0 +1,84 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>navbar</title>
+
+ <link rel="stylesheet" href="./css/navbar.css">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+
+
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="#" aria-label="Flowbite home">
+        <img class="brand-logo" src="MEDIA/sticky-notes.png" alt="Note Taker logo" />
+        <span class="brand-text">NOTE TAKER</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links" role="list">
+        <li><a class="nav-link active" href="#">HOME</a></li>
+        <li><a class="nav-link" href="#about">ADD NOTE</a></li>
+        <li><a class="nav-link" href="#services">SHOW NOTES</a></li>
+      </ul>
+
+      <form class="search" role="search" aria-label="Site">
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </span>
+        <input class="search-input" type="search" placeholder="Search..." aria-label="Search" />
+      </form>
+    </nav>
+  </header>
+  <ul id="mobile-menu" class="mobile-menu" role="list" hidden>
+    <li><a class="nav-link active" href="#">HOME</a></li>
+    <li><a class="nav-link" href="#about">ADD NOTE</a></li>
+    <li><a class="nav-link" href="#services">SHOW NOTES</a></li>
+  </ul>
+  <script>
+  (function(){
+    var toggle = document.querySelector('.menu-toggle');
+    var menu = document.getElementById('mobile-menu');
+    if(!toggle || !menu) return;
+    toggle.addEventListener('click', function(){
+      var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      menu.hidden = isOpen;
+    });
+    // Close menu when clicking a link
+    menu.addEventListener('click', function(e){
+      var target = e.target;
+      if(target && target.tagName === 'A'){
+        toggle.setAttribute('aria-expanded','false');
+        menu.hidden = true;
+      }
+    });
+  })();
+  </script>
+</body>
+
+
+</html>
+
+
+
+

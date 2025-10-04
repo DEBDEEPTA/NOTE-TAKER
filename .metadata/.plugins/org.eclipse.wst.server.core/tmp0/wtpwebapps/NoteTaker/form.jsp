@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Form</title>
+<link rel="stylesheet" href="./css/form.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=Bungee+Inline&family=Fugaz+One&family=Ribeye+Marrow&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="form-card">
+<form action="SaveNotesServlet" method="post" class="contact-form" novalidate>
+
+<div class="form-group">
+<label for="title">TITLE</label>
+<input type="text" required id="title" name="title" placeholder="" />
+<small class="hint" aria-hidden="true"></small>
+<div class="error" aria-live="polite"></div>
+</div>
+
+<div class="form-group">
+<label for="content">CONTENT</label>
+<textarea id="content" name="content" rows="3" required></textarea>
+<div class="error" aria-live="polite"></div>
+</div>
+
+<button type="submit" class="submit-btn">SUBMIT</button>
+</form>
+</div>
+</body>
+</html>

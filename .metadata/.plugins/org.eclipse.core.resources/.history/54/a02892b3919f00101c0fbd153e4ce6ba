@@ -1,0 +1,22 @@
+package com.entities;
+
+import java.util.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="notes")
+public class NoteTaker {
+	@Id
+
+	private int id;
+	private String title;
+	private String content;
+	private Date createDate;
+	private Date updateDate;
+	
+	
+
+}

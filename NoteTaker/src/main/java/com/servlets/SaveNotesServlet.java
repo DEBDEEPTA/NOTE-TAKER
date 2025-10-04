@@ -1,0 +1,58 @@
+package com.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.entities.Notes;
+import com.helper.FactoryProvider;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/SaveNotesServlet")
+public class SaveNotesServlet extends HttpServlet {
+//	private static final long serialVersionUID = 1L;
+//
+//  
+//    public SaveNotesServlet() {
+//        // TODO Auto-generated constructor stub
+//    }
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		try {
+			// FETCHING TITLE & CONTENT
+			String title =	request.getParameter("title");
+			String content =request.getParameter("content");
+			
+			Notes note = new Notes(title,content,new Date());
+			
+			// DISPLAYING TO CONSOLE
+			System.out.println(note.getId()+ " : "+note.getTitle());
+			
+			Session session = FactoryProvider.getFactory().openSession();
+			Transaction tx = session.beginTransaction();
+			
+			session.persist(note);
+			tx.commit();
+			session.close();
+			
+			// DISPLAYING TO BROWSER WINDOW
+			response.setContentType("text/html");	// BROWSER RESOLVES AS HTML PAGE
+			PrintWriter out = response.getWriter();
+			out.println("<h1>Note is added Sucessfully</h1>");
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+}

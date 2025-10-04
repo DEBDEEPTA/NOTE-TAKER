@@ -1,0 +1,72 @@
+/* Basic reset */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#333}
+
+/* Card container to mimic screenshot spacing */
+.form-card{max-width:62rem;margin:32px auto;padding:12px}
+
+/* Form */
+.contact-form{display:block}
+.form-group{margin-bottom:18px}
+.form-group label{
+    display:block;
+    font-size:18px;
+    color:#f4efef;
+    margin-bottom:6px;
+    text-align:center;
+
+    font-family: "Fugaz One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Inputs look like white boxes with subtle inner shadow */
+.contact-form input[type="tel"],
+
+.contact-form textarea{
+  width:100%;
+  border:1px solid #e5e5e5;
+  border-radius:2rem;
+  padding:10px 8px;
+  font-size:16px;
+  font-weight:bold;
+  outline:none;
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.08);
+  text-align:center;
+}
+.contact-form textarea{resize:vertical;min-height:70px}
+.contact-form input:focus,
+.contact-form textarea:focus{border-color:#c9c9c9;box-shadow:inset 0 1px 3px rgba(0,0,0,.1),0 0 0 2px rgba(0,0,0,.02)}
+
+/* Error/hint placeholders (not used now, but ready) */
+.error{color:#c0392b;font-size:12px;margin-top:6px;display:none}
+.hint{color:#aaa;font-size:11px}
+
+/* Submit button: wide gray bar with white text */
+.submit-btn{
+  width:100%;
+ 
+ 	/* From https://css.glass */
+	background: rgba(185, 183, 243, 0.16);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(3.9px);
+	-webkit-backdrop-filter: blur(3.9px);
+	border: 1px solid rgba(185, 183, 243, 0.11);
+ 
+  color:#fff;
+  border:none;
+  border-radius:2px;
+  padding:12px 10px;
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.2px;
+  cursor:pointer;
+  box-shadow:0 1px 0 rgba(0,0,0,.05);
+  
+  font-family: "Fugaz One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.submit-btn:hover{background:#a93333}
+.submit-btn:active{background:#a93333}
