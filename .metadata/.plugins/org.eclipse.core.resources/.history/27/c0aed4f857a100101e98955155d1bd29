@@ -1,0 +1,53 @@
+package com.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+
+import org.apache.catalina.connector.Response;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.entities.Notes;
+import com.helper.FactoryProvider;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/EditNoteServlet")
+public class EditNoteServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		try {
+			int noteId =Integer.parseInt(req.getParameter("note_id"));
+			
+			
+//			resp.setContentType("text/html");
+//			PrintWriter out = resp.getWriter();
+//			out.println("<h1>Servlet Reached</h1>");
+			
+			req.setAttribute("note_id", noteId);
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/editform.jsp");
+			dispatcher.forward(req, resp);
+			resp.sendRedirect("editform.jsp");
+			
+		
+		}catch(Exception e)
+		{
+			throw new RuntimeException("ERROR IN REQUEST FORWADING EDIT FORM JSP :->"+e.getMessage());
+		}
+		
+		
+	}
+
+	
+
+}

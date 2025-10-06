@@ -1,0 +1,71 @@
+package com.entities;
+
+import java.util.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="notes")
+public class Notes {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	private String title;
+	private String content;
+	private Date createDate;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	
+	
+	
+	public Notes(String title, String content, Date createDate) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.createDate = createDate;
+	}
+	
+	
+	public Notes() {
+		super();
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Notes [id=" + id + ", title=" + title + ", content=" + content + ", createDate=" + createDate + "]";
+	}
+	
+	
+
+	
+	
+	
+
+}

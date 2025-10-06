@@ -1,0 +1,38 @@
+<%@ page import = "org.hibernate.query.Query" %>
+<%@ page import ="org.hibernate.SessionFactory" %>
+<%@ page import ="org.hibernate.Session" %>
+<%@ page import="com.helper.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import=com.entities.Notes %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ALL NOTES</title>
+</head>
+<body>
+
+	 <div class="navContainer">
+   		<%@include file ="navbar.jsp"%>
+   	</div>
+   	
+   	<p>ALL NOTES PAGE</p>
+   	
+   	
+   	<%
+   		Session s =FactoryProvider.getFactory().openSession();
+   		Query q= s.createQuery("from Notes");
+   		List<Notes> list = q.list();
+   		
+   		for(Notes note: list)
+   		{
+   			out.println(note.getId());
+   		}
+   		
+   		s.close();
+   	%>
+   	
+</body>
+</html>

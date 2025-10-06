@@ -19,8 +19,6 @@
    		<%@include file ="navbar.jsp"%>
    	</div>
    	
-   
-   	<p>this is notes page</p>
    	
    <!-- NOTE FORM -->
    

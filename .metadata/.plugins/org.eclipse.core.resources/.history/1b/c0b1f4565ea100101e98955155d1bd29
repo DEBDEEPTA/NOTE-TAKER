@@ -1,0 +1,47 @@
+package com.servlets;
+
+import java.io.IOException;
+
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.entities.Notes;
+import com.helper.FactoryProvider;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/UpdateNotesServlet")
+public class UpdateNotesServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		try {
+			
+			int noteId = Integer.parseInt(req.getParameter("note_id").trim());
+			
+			Session s = FactoryProvider.getFactory().openSession();
+			
+			Transaction tx = s.beginTransaction();
+			Notes note = s.get(Notes.class, noteId);
+			
+			s.remove(note);			
+			tx.commit();
+			s.close();
+			
+			resp.sendRedirect("allnotes.jsp");
+			
+		}catch(Exception e)
+		{
+			throw new RuntimeException("ERROR IN DELETE OPERATION :->"+e.getMessage());
+		}
+	}
+	
+
+}

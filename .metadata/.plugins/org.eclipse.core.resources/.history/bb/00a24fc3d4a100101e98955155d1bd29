@@ -1,0 +1,146 @@
+<%@ page import = "org.hibernate.query.Query" %>
+<%@ page import ="org.hibernate.SessionFactory" %>
+<%@ page import ="org.hibernate.Session" %>
+<%@ page import="com.helper.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="com.entities.Notes" %>
+
+<%@ page import ="java.text.SimpleDateFormat" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- Bootstrap CSS -->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<title>SEARCH RESULT</title>
+</head>
+<body>
+	
+	 <div class="navContainer">
+   		<%@include file ="navbar.jsp"%>
+   	</div> 
+   	<h1>SEARCH PAGE</h1>	
+   	<%
+   	
+   		String title = request.getParameter("title").trim();
+   		String titleUC = title.toUpperCase();
+   		String titleLC = title.toLowerCase();
+   		// CHECKPOINT
+   		// System.out.println(title);
+   		
+   		Session s =FactoryProvider.getFactory().openSession();
+   		Query q= s.createQuery("FROM Notes n WHERE n.title LIKE:searchPatternUpper OR LIKE:searchPatternLower",Notes.class);
+   		q.setParameter("searchPatternUpper", "%"+titleUC+"%");
+   		q.setParameter("searchPatternLower", "%"+titleLC+"%");
+   		
+   		List<Notes> list = q.list();
+   		
+   		
+   		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+   		
+   		
+   		for(Notes note: list) 	{
+   			
+   			String dateString= dateFormat.format(note.getCreateDate());
+   		%>
+   			
+   	
+   	<div style="
+        width: 100rem;
+        background: #1A202C;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 50px auto;
+        font-family: 'Arial', sans-serif;
+        color: white;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(0, 0, 0, 0.2)'">
+        
+        <!-- Card Heading -->
+        <h2 style="
+            text-align: center;
+            margin: 0 0 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFFFFF;
+            line-height: 1.3;
+        "><%= note.getTitle()%></h2>
+        
+        <!-- Content Paragraph -->
+        <p style="
+            margin: 0 0 25px 0;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            font-weight: normal;
+        "><%= note.getContent()%></p>
+
+        <!-- Action Buttons -->
+        <div style="
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+            margin-bottom: 15px;
+        ">
+            <button title="EDIT" style="
+                width: 40px;
+                height: 40px;
+                padding: 0;
+                background: rgba(255, 255, 255, 0.2);
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                color: white;
+                font-size: 16px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            " onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'; this.style.borderColor='rgba(255, 255, 255, 0.5)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'; this.style.borderColor='rgba(255, 255, 255, 0.3)'">
+               
+               <a href="editform.jsp?note_id=<%=note.getId()%>" style="text-decoration: none; color: inherit;">✏️</a> 
+                
+                
+            </button>
+            
+            <button title="DELETE" style="
+                width: 40px;
+                height: 40px;
+                padding: 0;
+                background: rgba(255, 255, 255, 0.2);
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                color: white;
+                font-size: 16px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            " onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'; this.style.borderColor='rgba(255, 255, 255, 0.5)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'; this.style.borderColor='rgba(255, 255, 255, 0.3)'">
+            <a href="DeleteServlet?note_id=<%=note.getId()%>" style="text-decoration: none; color: inherit;">🗑️</a>
+            </button>
+        </div>
+        
+        <!-- Timestamp -->
+        <div style="
+            text-align: right;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+        "><%= dateString%></div>
+    </div>
+   	
+   	
+    
+    <%	
+   		}
+   		
+		s.close();
+   	%>
+   	
+</body>
+</html>

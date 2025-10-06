@@ -1,0 +1,48 @@
+package com.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+
+import org.apache.catalina.connector.Response;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.entities.Notes;
+import com.helper.FactoryProvider;
+import com.sun.tools.javac.util.JCDiagnostic.Note;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/DeleteServlet")
+public class DeleteServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		try {
+			
+			int noteId = Integer.parseInt(req.getParameter("note_id").trim());
+			
+			Session s = FactoryProvider.getFactory().openSession();
+			Notes note = s.get(Notes.class, noteId);
+			
+			s.remove(note);
+			
+			s.close();
+			
+			resp.sendRedirect("allnots.jsp");
+			
+		}catch(Exception e)
+		{
+			throw new RuntimeException("ERROR IN DELETE OPERATION :->"+e.getMessage());
+		}
+	}
+	
+
+}

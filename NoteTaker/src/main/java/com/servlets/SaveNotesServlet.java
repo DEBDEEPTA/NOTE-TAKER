@@ -18,12 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/SaveNotesServlet")
 public class SaveNotesServlet extends HttpServlet {
-//	private static final long serialVersionUID = 1L;
-//
-//  
-//    public SaveNotesServlet() {
-//        // TODO Auto-generated constructor stub
-//    }
+	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
@@ -34,8 +29,8 @@ public class SaveNotesServlet extends HttpServlet {
 			
 			Notes note = new Notes(title,content,new Date());
 			
-			// DISPLAYING TO CONSOLE
-			System.out.println(note.getId()+ " : "+note.getTitle());
+			// CHECKPOINT->DISPLAYING TO CONSOLE
+			// System.out.println(note.getTitle());
 			
 			Session session = FactoryProvider.getFactory().openSession();
 			Transaction tx = session.beginTransaction();
@@ -44,10 +39,15 @@ public class SaveNotesServlet extends HttpServlet {
 			tx.commit();
 			session.close();
 			
+			
+			// BREAKPOINT
 			// DISPLAYING TO BROWSER WINDOW
-			response.setContentType("text/html");	// BROWSER RESOLVES AS HTML PAGE
-			PrintWriter out = response.getWriter();
-			out.println("<h1>Note is added Sucessfully</h1>");
+//			response.setContentType("text/html");	// BROWSER RESOLVES AS HTML PAGE
+//			PrintWriter out = response.getWriter();
+//			out.println("<h1>Note is added Sucessfully</h1>");
+			
+			
+			response.sendRedirect("allnotes.jsp");
 			
 		}catch(Exception e)
 		{

@@ -1,0 +1,130 @@
+<%@ page import = "org.hibernate.query.Query" %>
+<%@ page import ="org.hibernate.SessionFactory" %>
+<%@ page import ="org.hibernate.Session" %>
+<%@ page import="com.helper.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="com.entities.Notes" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALL NOTES</title>
+</head>
+<body>
+
+	 <div class="navContainer">
+   		<%@include file ="navbar.jsp"%>
+   	</div>
+   	
+   	<p>ALL NOTES PAGE</p>
+   	
+   	
+   	<%
+   		Session s =FactoryProvider.getFactory().openSession();
+   		Query q= s.createQuery("from Notes");
+   		List<Notes> list = q.list();
+   		
+   		for(Notes note: list) 	{
+   		%>
+   			<!-- out.println(note.getId());
+   			out.println(note.getTitle());
+   			out.println("<br>"); -->
+   		
+   	
+   	
+   	
+   	<div style="
+        width: 100rem;
+        background: #1A202C;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 50px auto;
+        font-family: 'Arial', sans-serif;
+        color: white;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(0, 0, 0, 0.2)'">
+        
+        <!-- Card Heading -->
+        <h2 style="
+            text-align: center;
+            margin: 0 0 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFFFFF;
+            line-height: 1.3;
+        "><%= note.getTitle() %></h2>
+        
+        <!-- Content Paragraph -->
+        <p style="
+            margin: 0 0 25px 0;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            font-weight: normal;
+        ">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological orderaSDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD.</p>
+
+        <!-- Action Buttons -->
+        <div style="
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+            margin-bottom: 15px;
+        ">
+            <button title="EDIT" style="
+                width: 40px;
+                height: 40px;
+                padding: 0;
+                background: rgba(255, 255, 255, 0.2);
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                color: white;
+                font-size: 16px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            " onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'; this.style.borderColor='rgba(255, 255, 255, 0.5)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'; this.style.borderColor='rgba(255, 255, 255, 0.3)'">
+                ✏️
+            </button>
+            <button title="DELETE" style="
+                width: 40px;
+                height: 40px;
+                padding: 0;
+                background: rgba(255, 255, 255, 0.2);
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                color: white;
+                font-size: 16px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            " onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'; this.style.borderColor='rgba(255, 255, 255, 0.5)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'; this.style.borderColor='rgba(255, 255, 255, 0.3)'">
+                🗑️
+            </button>
+        </div>
+        
+        <!-- Timestamp -->
+        <div style="
+            text-align: right;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+        ">Dec 15, 2021 • 2:30 PM</div>
+    </div>
+   	
+   	
+    
+    <%	
+   		}
+   		
+		s.close();
+   	%>
+   	
+</body>
+</html>

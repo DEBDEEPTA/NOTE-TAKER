@@ -19,6 +19,5 @@
     <div class="navContainer">
    		<%@include file ="navbar.jsp"%>
    	</div>
-   	<p>this is home/index page</p>
 
 </html>
